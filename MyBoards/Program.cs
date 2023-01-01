@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using MyBoards.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<MyBoradsContext>(
+    option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyBoardsConnectionString"))
+    );
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
